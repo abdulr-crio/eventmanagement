@@ -48,6 +48,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         .build();
     
     String jwtToken = jwtService.generateToken(user);
+    userRepository.save(user);
     return AuthenticationResponse.builder()
         .accessToken(jwtToken)
         .build();

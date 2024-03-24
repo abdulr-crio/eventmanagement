@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.crio.eventmanagement.controller.exchange.requests.AddEventRequest;
 import com.crio.eventmanagement.controller.exchange.requests.UpdateEventRequest;
 import com.crio.eventmanagement.model.Event;
+import com.crio.eventmanagement.model.EventRegistration;
 import com.crio.eventmanagement.service.EventService;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 
 
 
@@ -55,4 +57,10 @@ public class EventController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("{}");
     }
 
+    @PostMapping("/{eventId}/register")
+    @PreAuthorize("hasAuthority('USER')")
+    public EventRegistration registerForEvent(@PathVariable("eventId") @NotBlank String eventId){
+        return eventService.registerForEvent(eventId);
+    }
+    
 }
