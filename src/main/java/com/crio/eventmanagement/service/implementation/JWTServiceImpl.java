@@ -3,9 +3,11 @@ package com.crio.eventmanagement.service.implementation;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.crio.eventmanagement.exception.InvalidTokenException;
 import com.crio.eventmanagement.service.JWTService;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -63,17 +65,17 @@ public class JWTServiceImpl implements JWTService {
 
     // To exctract a specific claim
     private <T> T extractClaims(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
+            final Claims claims = extractAllClaims(token);
+            return claimsResolver.apply(claims);
     }
 
     // To extract payload (claims) from the JWT token
     private Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
-        .setSigningKey(getSignInKey())
-        .build()
-        .parseClaimsJws(token)
-        .getBody();
+                .setSigningKey(getSignInKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     // private SecretKeySpec getSigningKey() {
