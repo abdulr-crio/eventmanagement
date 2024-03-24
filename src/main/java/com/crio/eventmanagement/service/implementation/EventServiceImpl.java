@@ -114,4 +114,18 @@ public class EventServiceImpl implements EventService {
         return eventRegistrationRepository.save(eventRegistration);
 
     }
+
+    @Override
+    public void deRegisterForEvent(String eventId) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+        String email = userDetails.getUsername();      
+        
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new EventDoesNotExistException("Event does not exist"));
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        event.getRegisteredUsers().remove(user);
+        eventRepository.save(event);
+
+        eventRegistrationRepository.deleteByEmailAndEventId(user.getEmail(), event.getId());
+    }
 }

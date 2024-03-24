@@ -62,5 +62,12 @@ public class EventController {
     public EventRegistration registerForEvent(@PathVariable("eventId") @NotBlank String eventId){
         return eventService.registerForEvent(eventId);
     }
+
+    @DeleteMapping("/{eventId}/register")
+    @PreAuthorize("hasAuthority('USER')")
+    public ResponseEntity<Object> deRegisterForEvent(@PathVariable("eventId") @NotBlank String eventId){
+        eventService.deRegisterForEvent(eventId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("{}");
+    }
     
 }

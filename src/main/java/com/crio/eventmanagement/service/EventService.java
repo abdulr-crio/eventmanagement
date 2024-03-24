@@ -13,4 +13,5 @@ public interface EventService {
     Event updateEvent (String eventId, UpdateEventRequest updateEventRequest);
     void deleteEvent (String eventId);
     EventRegistration registerForEvent(String eventId);
+    void deRegisterForEvent(String eventId);
 }
