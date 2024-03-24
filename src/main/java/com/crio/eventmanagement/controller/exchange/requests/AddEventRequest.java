@@ -1,5 +1,7 @@
 package com.crio.eventmanagement.controller.exchange.requests;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -19,9 +21,10 @@ import lombok.NoArgsConstructor;
 public class AddEventRequest {
     @NotBlank private String eventName;
     @NotBlank private String eventDescription;
+    @NotBlank private String eventPlace;
     @JsonFormat(pattern="dd-MM-yyyy")
-    @NotNull private Date eventDate;
+    @NotNull private LocalDate eventDate;
     @JsonFormat(pattern = "HH:mm")
-    @NotNull private Date eventTime;
+    @NotNull private LocalTime eventTime;
     private List<User> registeredUsers;
 }

@@ -54,6 +54,7 @@ public class UserServiceImpl implements UserService {
             return RegisteredEventsResponse.builder()
             .eventName(event.getEventName())
             .eventDescription(event.getEventDescription())
+            .eventPlace(event.getEventPlace())
             .eventDate(event.getEventDate())
             .eventTime(event.getEventTime())
             .build();

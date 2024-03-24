@@ -21,6 +21,7 @@ import com.crio.eventmanagement.repository.EventRegistrationRepository;
 import com.crio.eventmanagement.repository.EventRepository;
 import com.crio.eventmanagement.repository.UserRepository;
 import com.crio.eventmanagement.service.EventService;
+import com.crio.eventmanagement.service.MailService;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -33,6 +34,9 @@ public class EventServiceImpl implements EventService {
 
     @Autowired
     EventRegistrationRepository eventRegistrationRepository;
+
+    @Autowired
+    MailService mailService;
     
 
     @Override
@@ -41,6 +45,8 @@ public class EventServiceImpl implements EventService {
         Event event = Event.builder()
                 .eventName(addEventRequest.getEventName())
                 .eventDescription(addEventRequest.getEventDescription())
+                .eventPlace(addEventRequest.getEventPlace())
+                .eventPlace(addEventRequest.getEventPlace())
                 .eventDate(addEventRequest.getEventDate())
                 .eventTime(addEventRequest.getEventTime())
                 .registeredUsers(addEventRequest.getRegisteredUsers())
@@ -74,6 +80,9 @@ public class EventServiceImpl implements EventService {
         }
         if (updateEventRequest.getEventTime() != null) {
             existingEvent.setEventTime(updateEventRequest.getEventTime());
+        }
+        if (updateEventRequest.getEventPlace() != null) {
+            existingEvent.setEventPlace(updateEventRequest.getEventPlace());
         }
 
         // Save the updated event to the database
@@ -110,6 +119,8 @@ public class EventServiceImpl implements EventService {
         .eventId(event.getId()).email(user.getEmail()).build();
 
         eventRepository.save(event);
+
+        mailService.sendMail(user.getEmail(), user.getFirstName(), event);
         
         return eventRegistrationRepository.save(eventRegistration);
 

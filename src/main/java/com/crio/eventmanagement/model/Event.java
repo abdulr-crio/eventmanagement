@@ -1,5 +1,7 @@
 package com.crio.eventmanagement.model;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -24,10 +26,11 @@ public class Event {
     private String id;
     private String eventName;
     private String eventDescription;
+    private String eventPlace;
     @JsonFormat(pattern="dd-MM-yyyy")
-    private Date eventDate;
+    private LocalDate eventDate;
     @JsonFormat(pattern = "HH:mm")
-    private Date eventTime;
+    private LocalTime eventTime;
     // This design can be improved
     @DBRef
     private List<User> registeredUsers;
