@@ -24,7 +24,7 @@ public class Event {
     private String id;
     private String eventName;
     private String eventDescription;
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="dd-MM-yyyy")
     private Date eventDate;
     @JsonFormat(pattern = "HH:mm")
     private Date eventTime;

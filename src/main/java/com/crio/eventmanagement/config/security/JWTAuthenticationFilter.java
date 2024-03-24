@@ -11,7 +11,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.crio.eventmanagement.exception.InvalidTokenException;
 import com.crio.eventmanagement.service.JWTService;
 import com.crio.eventmanagement.service.UserService;
 

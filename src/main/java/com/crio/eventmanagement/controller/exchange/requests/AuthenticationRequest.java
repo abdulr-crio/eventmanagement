@@ -1,5 +1,6 @@
 package com.crio.eventmanagement.controller.exchange.requests;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthenticationRequest {
 
-  private String email;
-  private String password;
+  @NotBlank private String email;
+  @NotBlank private String password;
 }

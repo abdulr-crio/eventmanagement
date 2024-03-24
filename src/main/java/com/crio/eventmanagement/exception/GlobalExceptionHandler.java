@@ -15,5 +15,11 @@ public class GlobalExceptionHandler {
         ErrorBodyResponse errorBodyResponse = new ErrorBodyResponse(e.getMessage());
         return new ResponseEntity<>(errorBodyResponse.getBody(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ServerException.class)
+    public ResponseEntity<Object> handleFieldsInvalidTokenException(ServerException e) {
+        ErrorBodyResponse errorBodyResponse = new ErrorBodyResponse(e.getMessage());
+        return new ResponseEntity<>(errorBodyResponse.getBody(), HttpStatus.SERVICE_UNAVAILABLE);
+    }
     
 }

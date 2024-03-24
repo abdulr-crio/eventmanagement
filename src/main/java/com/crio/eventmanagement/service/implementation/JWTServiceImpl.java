@@ -3,11 +3,9 @@ package com.crio.eventmanagement.service.implementation;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.crio.eventmanagement.exception.InvalidTokenException;
 import com.crio.eventmanagement.service.JWTService;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -37,7 +35,7 @@ public class JWTServiceImpl implements JWTService {
                 .setClaims(additionalClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .setExpiration(new Date(System.currentTimeMillis() + 86400000)) //ONE DAY
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
