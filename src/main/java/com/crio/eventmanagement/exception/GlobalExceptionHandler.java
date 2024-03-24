@@ -21,5 +21,11 @@ public class GlobalExceptionHandler {
         ErrorBodyResponse errorBodyResponse = new ErrorBodyResponse(e.getMessage());
         return new ResponseEntity<>(errorBodyResponse.getBody(), HttpStatus.SERVICE_UNAVAILABLE);
     }
+
+    @ExceptionHandler(EventDoesNotExistException.class)
+    public ResponseEntity<Object> handleEventDoesNotExistException(EventDoesNotExistException e) {
+        ErrorBodyResponse errorBodyResponse = new ErrorBodyResponse(e.getMessage());
+        return new ResponseEntity<>(errorBodyResponse.getBody(), HttpStatus.NOT_FOUND);
+    }
     
 }
